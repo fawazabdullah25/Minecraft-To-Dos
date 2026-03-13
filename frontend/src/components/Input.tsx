@@ -34,11 +34,11 @@ const Input = ({ onTaskAdded }: InputProps) => {
       <div className="relative w-full max-w-4xl">
         <input
           aria-label="Add task"
-          placeholder="Add your Next Ramadan Task Here......"
+          placeholder="Add your Next Minecraft Mission Here......"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-          className="w-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--gold-cream) rounded-full py-4 px-6 pl-12 placeholder:text-amber-200/50 text-amber-100 outline-none focus:border-(--gold-cream) focus:ring-2 focus:ring-(--gold-primary)"
+          className="w-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--gold-cream) rounded-full py-4 px-6 pl-12 placeholder:text-green-200/50 text-green-100 outline-none focus:border-(--gold-cream) focus:ring-2 focus:ring-(--gold-primary)"
         />
 
         {/* Right decoration icon (non-interactive) */}

@@ -15,7 +15,7 @@ Rebuild the visual identity of the app around a completely different theme. Exam
 
 - [x] Change the app name in `Header.tsx` and `index.html` `<title>`
 - [x] Replace the Ramadan colour tokens in `index.css` with a new colour palette (minimum 2 colour changes)
-- [ ] Swap out or replace some images in `src/assets/` to match the new theme
+- [x] Swap out or replace some images in `src/assets/` to match the new theme
 - [ ] Update the task cards to fit the new theme (minimum 5 tasks)
 
 > **+10 pts bonus** awarded for overall visual polish — how good does the finished app actually look? Judges will assess colour harmony, image choices, and how cohesive the new theme feels end-to-end.

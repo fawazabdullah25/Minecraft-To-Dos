@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import backGroundPattern from "./assets/Background Vector.svg";
+import backGroundPattern from "./assets/wallpaper3.png";
 import lanternRight from "./assets/Right lanterns.png";
 import lanternLeft from "./assets/left lanterns.png";
 import Header from "./components/Header";
 import Input from "./components/Input";
 import TaskCard from "./components/TaskCard";
 import TaskModal from "./components/TaskModal";
-import ParticleBackground from "./components/ParticleBackground";
 import { getAllTasks, updateTask, deleteTask } from "./api";
 import type { Task } from "./api";
+import Wallpaper from "./components/Wallpaper";
 
 function App() {
   const [openTaskId, setOpenTaskId] = useState<number | null>(null);
@@ -58,13 +58,13 @@ function App() {
       className="min-h-screen bg-(--bg-dark) text-white relative overflow-hidden font-sans flex flex-col items-center"
       style={{ backgroundImage: `url(${backGroundPattern})`, backgroundSize: "cover" }}
     >
-      <ParticleBackground />
 
+      <Wallpaper />
       <img src={lanternRight} alt="Right Lanterns" className="absolute top-0 right-0 w-32 md:w-70 opacity-80 z-2" />
       <img src={lanternLeft} alt="Left Lanterns" className="absolute top-0 left-0 w-32 md:w-70 opacity-80 z-2" />
 
       {/* Gold border frame */}
-      <div className="relative z-2 mx-auto w-[95vw] h-[90vh] border-[3px] border-(--text-cream) flex flex-col items-center gap-10 py-12 px-10 shadow-2xl my-12">
+      <div className="relative z-2 mx-auto w-[95vw] h-[90vh] border-[3px] border-(--text-cream) flex flex-col items-center gap-10 py-12 px-10 shadow-2xl my-12 backdrop-blur-[5px]">
         <div className="max-w-4xl flex flex-col items-center justify-start gap-6">
           <Header />
           <Input onTaskAdded={handleTaskAdded} />
