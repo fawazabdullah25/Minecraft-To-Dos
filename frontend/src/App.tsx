@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import backGroundPattern from "./assets/wallpaper3.png";
+import wallpaper1 from "./assets/wallpaper1.png";
+import wallpaper2 from "./assets/wallpaper2.png";
+import wallpaper3 from "./assets/wallpaper3.png";
 import lanternRight from "./assets/Right lanterns.png";
 import lanternLeft from "./assets/left lanterns.png";
 import Header from "./components/Header";
@@ -13,6 +15,7 @@ import Wallpaper from "./components/Wallpaper";
 function App() {
   const [openTaskId, setOpenTaskId] = useState<number | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [wallpaper, setWallpaper] = useState(wallpaper1)
 
   // ── Task 1: Load tasks from the API when the page first opens ──
   // useEffect with [] runs exactly once — after the first render.
@@ -53,13 +56,15 @@ function App() {
     setOpenTaskId(null);
   };
 
+
+
   return (
     <div
       className="min-h-screen bg-(--bg-dark) text-white relative overflow-hidden font-sans flex flex-col items-center"
-      style={{ backgroundImage: `url(${backGroundPattern})`, backgroundSize: "cover" }}
+      style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: "cover" }}
     >
 
-      <Wallpaper />
+      <Wallpaper onChangeWallpaper={setWallpaper} />
       <img src={lanternRight} alt="Right Lanterns" className="absolute top-0 right-0 w-32 md:w-70 opacity-80 z-2" />
       <img src={lanternLeft} alt="Left Lanterns" className="absolute top-0 left-0 w-32 md:w-70 opacity-80 z-2" />
 
