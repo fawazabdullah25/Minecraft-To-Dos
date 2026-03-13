@@ -13,8 +13,8 @@
 
 Rebuild the visual identity of the app around a completely different theme. Examples: a space explorer board, a gaming quest tracker, a fitness challenge app, a travel bucket list.
 
-- [ ] Change the app name in `Header.tsx` and `index.html` `<title>`
-- [ ] Replace the Ramadan colour tokens in `index.css` with a new colour palette (minimum 2 colour changes)
+- [x] Change the app name in `Header.tsx` and `index.html` `<title>`
+- [x] Replace the Ramadan colour tokens in `index.css` with a new colour palette (minimum 2 colour changes)
 - [ ] Swap out or replace some images in `src/assets/` to match the new theme
 - [ ] Update the task cards to fit the new theme (minimum 5 tasks)
 

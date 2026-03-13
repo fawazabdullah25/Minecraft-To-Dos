@@ -1,77 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 @import "tailwindcss";
 
 
 :root {
 	--bg-dark: #0A1128;
 	--panel-deep: #0D1726;
-	--gold-primary: #D4AF37;
-	--gold-cream: #FFF1AA;
-	--gold-bright: #E8C84A;
+	--color-primary: #00c365;
+	--color-secondary: #57b958;
 	--cta-1: #C9A227;
 	--cta-2: #E8C84A;
 	--text-cream: #F8E4AE;
-	--scroll-track: rgba(212,175,55,0.06);
-	--scroll-thumb-start: rgba(212,175,55,0.95);
-	--scroll-thumb-end: rgba(212,175,55,0.6);
+	--scroll-track: rgba(212, 175, 55, 0.06);
+	--scroll-thumb-start: rgba(212, 175, 55, 0.95);
+	--scroll-thumb-end: rgba(212, 175, 55, 0.6);
 }
+
+@font-face {
+	font-family: MinecraftRegular;
+	font-style: normal;
+	src: url(./src/assets/fonts/minecraft-font/MinecraftRegular.otf) format("opentype");
+}
+
+.font-mc {
+	font-family: 'MinecraftRegular';
+}
+
 
 /* Crescents  Colrs */
 .crescent-active {
-  filter: drop-shadow(0 0 6px rgba(212,175,55,0.4)) saturate(1.2) brightness(1);
-}
-.crescent-inactive {
-  filter: grayscale(1) brightness(0.6) opacity(0.55);
+	filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4)) saturate(1.2) brightness(1);
 }
 
-/* Font utility for Lexend (Google Fonts) */
-.font-lexend {
-	font-family: 'Lexend';
+.crescent-inactive {
+	filter: grayscale(1) brightness(0.6) opacity(0.55);
 }
 
 /* prevent horizontal page scroll */
-html, body {
+html,
+body {
 	overflow-x: hidden;
-	background-color: var(--bg-dark); /* matches app background so scrollbar area isn't white */
+	background-color: var(--bg-dark);
+	/* matches app background so scrollbar area isn't white */
 }
 
 /* Temporarily hide scrollbars but keep scrolling functional */
-html, body {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
+html,
+body {
+	-ms-overflow-style: none;
+	/* IE and Edge */
+	scrollbar-width: none;
+	/* Firefox */
 }
 
 
 /*========*/
-html::-webkit-scrollbar, body::-webkit-scrollbar {
-	display: none; /* Chrome, Safari, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+	display: none;
+	/* Chrome, Safari, Opera */
 }
 
 /* Themed scrollbar — gold on dark navy */
 ::-webkit-scrollbar {
 	width: 6px;
 }
+
 ::-webkit-scrollbar-track {
 	background: rgba(212, 175, 55, 0.08);
 	border-radius: 10px;
 	margin: 4px 0;
 }
+
 ::-webkit-scrollbar-thumb {
 	background: linear-gradient(180deg, var(--gold-primary) 0%, #a07d1c 100%);
 	border-radius: 10px;
 	box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
 }
+
 ::-webkit-scrollbar-thumb:hover {
 	background: linear-gradient(180deg, #f0cc55 0%, var(--gold-primary) 100%);
 	box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
 }
+
 ::-webkit-scrollbar-corner {
 	background: transparent;
 }
 
 /* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--gold-primary) rgba(212, 175, 55, 0.08);
+	scrollbar-width: thin;
+	scrollbar-color: var(--gold-primary) rgba(212, 175, 55, 0.08);
 }
-
