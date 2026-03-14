@@ -3,7 +3,7 @@
 
 const Header = () => {
   return (
-    <div className="text-6xl text-(--color-primary) font-mc text-center">
+    <div className="text-6xl text-(--color-primary) font-mcb text-center bg-green-200 rounded-md p-2">
       Minecraft To-Dos Board
     </div>
   );

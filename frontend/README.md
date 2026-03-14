@@ -114,19 +114,19 @@ This file is the source of truth for all task cards. Each entry maps directly on
     "title": "Iftar Prep",
     "description": "Prepare 20 meals for the local area",
     "date": "Mar 6th 2026",
-    "activeCrescents": 4,
+    "activeBlocks": 4,
     "variant": "small",
     "summary": [
       "Assemble individual meal kits (dates, snacks, main course).",
       "Logistics setup at distribution point.",
       "Hygiene check of all items."
     ],
-    "volunteersNeeded": 10
+    "timeNeeded": 10
   }
 ]
 ```
 
-> **Workshop note:** The crescent rating is always out of 5 — hardcoded in the components. `activeCrescents` is how many are "lit up". `volunteersNeeded` is a plain number; the components append the label "volunteers required" in the UI. `summary` and `volunteersNeeded` are only shown in the modal.
+> **Workshop note:** The crescent rating is always out of 5 — hardcoded in the components. `activeBlocks` is how many are "lit up". `timeNeeded` is a plain number; the components append the label "volunteers required" in the UI. `summary` and `timeNeeded` are only shown in the modal.
 
 ---
 
@@ -145,9 +145,9 @@ This is the **first file** to set up. It defines the colour palette as CSS custo
 :root {
   --bg-dark:        #0A1128;  /* deep navy — main background */
   --panel-deep:     #0D1726;  /* slightly lighter navy — card/modal backgrounds */
-  --gold-primary:   #D4AF37;  /* main gold */
+  --color-primary:   #D4AF37;  /* main gold */
   --gold-cream:     #FFF1AA;  /* light gold / cream — borders, subtle text */
-  --gold-bright:    #E8C84A;  /* bright gold — highlights */
+  --color-primary:    #E8C84A;  /* bright gold — highlights */
   --cta-1:          #C9A227;  /* CTA button gradient start */
   --cta-2:          #E8C84A;  /* CTA button gradient end */
   --text-cream:     #F8E4AE;  /* body/heading text */
@@ -310,7 +310,7 @@ const Input = () => {
             py-4 px-6 pl-12
             placeholder:text-amber-200/50 text-amber-100
             outline-none
-            focus:border-(--gold-cream) focus:ring-2 focus:ring-(--gold-primary)
+            focus:border-(--gold-cream) focus:ring-2 focus:ring-(--color-primary)
           "
         />
 
@@ -379,12 +379,12 @@ export type TaskCardProps = {
   title: string;
   description: string;
   date: string;
-  activeCrescents?: number;   // how many crescents are "lit"
+  activeBlocks?: number;   // how many crescents are "lit"
   variant?: "small" | "wide"; // wide cards span 2 grid columns
   completed?: boolean;
   completedOn?: string;       // e.g. "Mar 12th 2026"
   summary?: string[];         // shown only in the modal
-  volunteersNeeded?: number;  // shown only in the modal — label appended in the UI
+  timeNeeded?: number;  // shown only in the modal — label appended in the UI
   onClick?: () => void;       // passed down from App to open the modal
 };
 ```
@@ -399,7 +399,7 @@ const TaskCard = ({
   title,
   description,
   date,
-  activeCrescents = 0,
+  activeBlocks = 0,
   variant         = "small",
   completed       = false,
   completedOn,
@@ -447,8 +447,8 @@ const TaskCard = ({
           <img
             key={i}
             src={Crescent}
-            alt={i < activeCrescents ? "active" : "inactive"}
-            className={"w-6 h-6 " + (i < activeCrescents ? "crescent-active" : "crescent-inactive")}
+            alt={i < activeBlocks ? "active" : "inactive"}
+            className={"w-6 h-6 " + (i < activeBlocks ? "crescent-active" : "crescent-inactive")}
           />
         ))}
       </div>
@@ -457,11 +457,11 @@ const TaskCard = ({
       {completed ? (
         <div className="relative w-full mt-3">
           <div className="flex items-center gap-2 w-full">
-            <span className="flex-1 border-t-2 border-(--gold-bright)/70" />
-            <span className="text-(--gold-bright) text-base font-bold tracking-wide whitespace-nowrap">
+            <span className="flex-1 border-t-2 border-(--color-primary)/70" />
+            <span className="text-(--color-primary) text-base font-bold tracking-wide whitespace-nowrap">
               Completed
             </span>
-            <span className="flex-1 border-t-2 border-(--gold-bright)/70" />
+            <span className="flex-1 border-t-2 border-(--color-primary)/70" />
           </div>
           <p className="text-center text-amber-200/50 text-xs mt-1">
             {completedOn ?? date}
@@ -485,9 +485,9 @@ export default TaskCard;
   title="Distribute Food"
   description="Help distribute food packages to families in need during Ramadan."
   date="Mar 15th 2026"
-  activeCrescents={4}
+  activeBlocks={4}
   variant="wide"
-  volunteersNeeded={5}
+  timeNeeded={5}
   onClick={() => console.log("Card clicked")}
 />
 ```
@@ -806,7 +806,7 @@ const handleToggleCompleted = (id: number) => {
       t.id === id
         ? t.completed
           ? { ...t, completed: false, completedOn: undefined }
-          : { ...t, completed: true, completedOn: t.date, activeCrescents: 5 }
+          : { ...t, completed: true, completedOn: t.date, activeBlocks: 5 }
         : t
     )
   );
@@ -840,14 +840,14 @@ type TaskModalProps = TaskCardProps & {
   open: boolean;
   onClose: () => void;
   onToggleCompleted?: () => void;
-  totalCrescents?: number;
+  totalBlocks?: number;
 };
 
 const TaskModal = ({
   open, onClose, onToggleCompleted,
   title, description, date,
-  activeCrescents = 0, totalCrescents = 5,
-  summary = [], volunteersNeeded,
+  activeBlocks = 0, totalBlocks = 5,
+  summary = [], timeNeeded,
   completed = false, completedOn,
 }: TaskModalProps) => {
 
@@ -897,12 +897,12 @@ const TaskModal = ({
 
           {/* Title + crescents + date */}
           <div className="flex flex-col items-center gap-3">
-            <h1 className="font-bold text-(--gold-primary) text-3xl font-lexend">{title}</h1>
+            <h1 className="font-bold text-(--color-primary) text-3xl font-lexend">{title}</h1>
             <div className="flex items-center gap-2">
               {Array.from({ length: 5 }).map((_, i) => (
                 <img key={i} src={Crescent}
-                  alt={i < activeCrescents ? "active" : "inactive"}
-                  className={"w-7 h-7 " + (i < activeCrescents ? "crescent-active" : "crescent-inactive")}
+                  alt={i < activeBlocks ? "active" : "inactive"}
+                  className={"w-7 h-7 " + (i < activeBlocks ? "crescent-active" : "crescent-inactive")}
                 />
               ))}
             </div>
@@ -913,14 +913,14 @@ const TaskModal = ({
 
           {/* Description */}
           <div>
-            <p className="font-bold text-(--gold-primary) text-sm mb-1">Description</p>
+            <p className="font-bold text-(--color-primary) text-sm mb-1">Description</p>
             <p className="text-amber-100/80 text-sm leading-relaxed">{description}</p>
           </div>
 
           {/* Summary bullet list */}
           {summary.length > 0 && (
             <div>
-              <p className="font-bold text-(--gold-primary) text-sm mb-2">Summary:</p>
+              <p className="font-bold text-(--color-primary) text-sm mb-2">Summary:</p>
               <ul className="space-y-1 pl-1">
                 {summary.map((item, i) => (
                   <li key={i} className="flex gap-2 text-sm text-amber-100/80">
@@ -933,14 +933,14 @@ const TaskModal = ({
           )}
 
           {/* Volunteers Needed */}
-          {volunteersNeeded && (
+          {timeNeeded && (
             <div>
-              <p className="font-bold text-(--gold-primary) text-sm mb-1">Volunteers Needed:</p>
+              <p className="font-bold text-(--color-primary) text-sm mb-1">Volunteers Needed:</p>
               <p className="text-sm text-amber-100/80 flex items-center gap-2">
                 <svg className="w-5 h-5 shrink-0 fill-[#D4AF37]" viewBox="0 0 24 24">
                   <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
                 </svg>
-                <span>{volunteersNeeded} volunteers required</span>
+                <span>{timeNeeded} volunteers required</span>
               </p>
             </div>
           )}
@@ -950,7 +950,7 @@ const TaskModal = ({
             <div className="w-full flex flex-col items-center gap-2 mt-2">
               <div className="flex items-center w-full justify-center gap-4">
                 <span className="h-1 rounded bg-(--gold-cream) w-20" />
-                <span className="text-(--gold-bright) text-2xl font-bold tracking-wide">Completed</span>
+                <span className="text-(--color-primary) text-2xl font-bold tracking-wide">Completed</span>
                 <span className="h-1 rounded bg-(--gold-cream) w-20" />
               </div>
               <p className="text-amber-200/60 text-sm">{completedOn ?? date}</p>
@@ -1043,7 +1043,7 @@ function App() {
         t.id === id
           ? t.completed
             ? { ...t, completed: false, completedOn: undefined }
-            : { ...t, completed: true, completedOn: t.date, activeCrescents: t.totalCrescents }
+            : { ...t, completed: true, completedOn: t.date, activeBlocks: t.totalBlocks }
           : t
       )
     );
@@ -1202,18 +1202,18 @@ This file holds every API call. None of the React components need to know the UR
 const BASE_URL = "http://localhost:5000";
 
 // The shape of a Task as our frontend understands it.
-// Note: the backend calls it `priority`; we rename to `activeCrescents` here.
+// Note: the backend calls it `priority`; we rename to `activeBlocks` here.
 export type Task = {
   id: number;
   title: string;
   description: string;
   date: string;
-  activeCrescents: number;    // mapped from backend `priority`
+  activeBlocks: number;    // mapped from backend `priority`
   variant?: "small" | "wide";
   completed?: boolean;
   completedOn?: string;
   summary?: string[];
-  volunteersNeeded?: number;
+  timeNeeded?: number;
 };
 
 // Internal helper — converts the raw backend object into our Task shape.
@@ -1223,12 +1223,12 @@ function mapTask(raw: any): Task {
     title: raw.title,
     description: raw.description,
     date: raw.date,
-    activeCrescents: raw.priority ?? 0,
+    activeBlocks: raw.priority ?? 0,
     variant: raw.variant,
     completed: raw.completed,
     completedOn: raw.completedOn,
     summary: raw.summary,
-    volunteersNeeded: raw.volunteersNeeded,
+    timeNeeded: raw.timeNeeded,
   };
 }
 
@@ -1254,9 +1254,9 @@ export async function createTask(description: string): Promise<Task> {
 // PUT /todos/:id — save changes to an existing task
 export async function updateTask(id: number, updates: Partial<Omit<Task, "id">>): Promise<Task> {
   const body: Record<string, unknown> = { ...updates };
-  if ("activeCrescents" in body) {
-    body.priority = body.activeCrescents;   // backend uses "priority"
-    delete body.activeCrescents;
+  if ("activeBlocks" in body) {
+    body.priority = body.activeBlocks;   // backend uses "priority"
+    delete body.activeBlocks;
   }
   const response = await fetch(`${BASE_URL}/todos/${id}`, {
     method: "PUT",
@@ -1331,7 +1331,7 @@ function App() {
     const updated = await updateTask(id, {
       completed: !task.completed,
       completedOn: task.completed ? undefined : task.date,
-      activeCrescents: task.completed ? task.activeCrescents : 5,
+      activeBlocks: task.completed ? task.activeBlocks : 5,
     });
     setTasks((prev) => prev.map((t) => (t.id === id ? updated : t)));
   };
@@ -1462,7 +1462,7 @@ const Input = ({ onTaskAdded }: InputProps) => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-          className="w-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--gold-cream) rounded-full py-4 px-6 pl-12 placeholder:text-amber-200/50 text-amber-100 outline-none focus:border-(--gold-cream) focus:ring-2 focus:ring-(--gold-primary)"
+          className="w-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--gold-cream) rounded-full py-4 px-6 pl-12 placeholder:text-amber-200/50 text-amber-100 outline-none focus:border-(--gold-cream) focus:ring-2 focus:ring-(--color-primary)"
         />
 
         {/* Right decoration icon (non-interactive) */}
@@ -1516,13 +1516,13 @@ The modal already handles **Edit** and **Delete** for you. Here's how it works s
 
 | Frontend (`Task` type) | Backend (Flask / DB) | Notes |
 |---|---|---|
-| `activeCrescents` | `priority` | Integer 1–5 |
+| `activeBlocks` | `priority` | Integer 1–5 |
 | `completedOn` | `completedOn` | Date string, may be `null` |
-| `volunteersNeeded` | `volunteersNeeded` | Integer |
+| `timeNeeded` | `timeNeeded` | Integer |
 | `summary` | `summary` | Array of strings |
 | `variant` | `variant` | `"small"` or `"wide"` |
 
-The `mapTask()` helper in `api.ts` handles the `priority` → `activeCrescents` rename so no other file ever has to know about it.
+The `mapTask()` helper in `api.ts` handles the `priority` → `activeBlocks` rename so no other file ever has to know about it.
 
 ---
 
@@ -1556,18 +1556,18 @@ This way none of the React components need to know what URL the backend lives at
 const BASE_URL = "http://localhost:5000";
 
 // The shape of a Task as our frontend understands it.
-// Note: the backend calls it `priority`; we rename to `activeCrescents` here.
+// Note: the backend calls it `priority`; we rename to `activeBlocks` here.
 export type Task = {
   id: number;
   title: string;
   description: string;
   date: string;
-  activeCrescents: number;    // mapped from backend `priority`
+  activeBlocks: number;    // mapped from backend `priority`
   variant?: "small" | "wide";
   completed?: boolean;
   completedOn?: string;
   summary?: string[];
-  volunteersNeeded?: number;
+  timeNeeded?: number;
 };
 
 // Internal helper — converts the raw backend object into our Task shape.
@@ -1577,12 +1577,12 @@ function mapTask(raw: any): Task {
     title: raw.title,
     description: raw.description,
     date: raw.date,
-    activeCrescents: raw.priority ?? 0,
+    activeBlocks: raw.priority ?? 0,
     variant: raw.variant,
     completed: raw.completed,
     completedOn: raw.completedOn,
     summary: raw.summary,
-    volunteersNeeded: raw.volunteersNeeded,
+    timeNeeded: raw.timeNeeded,
   };
 }
 
@@ -1608,9 +1608,9 @@ export async function createTask(description: string): Promise<Task> {
 // PUT /todos/:id — save changes to an existing task
 export async function updateTask(id: number, updates: Partial<Omit<Task, "id">>): Promise<Task> {
   const body: Record<string, unknown> = { ...updates };
-  if ("activeCrescents" in body) {
-    body.priority = body.activeCrescents;   // backend field name
-    delete body.activeCrescents;
+  if ("activeBlocks" in body) {
+    body.priority = body.activeBlocks;   // backend field name
+    delete body.activeBlocks;
   }
   const response = await fetch(`${BASE_URL}/todos/${id}`, {
     method: "PUT",

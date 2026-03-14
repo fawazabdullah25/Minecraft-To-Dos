@@ -16,7 +16,7 @@ Rebuild the visual identity of the app around a completely different theme. Exam
 - [x] Change the app name in `Header.tsx` and `index.html` `<title>`
 - [x] Replace the Ramadan colour tokens in `index.css` with a new colour palette (minimum 2 colour changes)
 - [x] Swap out or replace some images in `src/assets/` to match the new theme
-- [ ] Update the task cards to fit the new theme (minimum 5 tasks)
+- [x] Update the task cards to fit the new theme (minimum 5 tasks)
 
 > **+10 pts bonus** awarded for overall visual polish — how good does the finished app actually look? Judges will assess colour harmony, image choices, and how cohesive the new theme feels end-to-end.
 
@@ -26,10 +26,10 @@ Rebuild the visual identity of the app around a completely different theme. Exam
 
 Add a `tag` field to each task and display it as a badge on the card. Since tasks are generated and stored by the Flask backend, both the backend and frontend need updating.
 
-- [ ] Update `crud.py` so the Gemini prompt generates a `tag` field and it is included in the saved and returned task
-- [ ] Add `tag?: string` to the `Task` type in `src/api.ts` and return it from `mapTask()`
-- [ ] Add `tag?: string` to the `TaskCardProps` type in `TaskCard.tsx`
-- [ ] Display the tag as a small badge somewhere on the card
+- [x] Update `crud.py` so the Gemini prompt generates a `tag` field and it is included in the saved and returned task
+- [x] Add `tag?: string` to the `Task` type in `src/api.ts` and return it from `mapTask()`
+- [x] Add `tag?: string` to the `TaskCardProps` type in `TaskCard.tsx`
+- [x] Display the tag as a small badge somewhere on the card
 
 > **Hints**
 >
@@ -74,9 +74,9 @@ Add a `tag` field to each task and display it as a badge on the card. Since task
 
 Instead of using the general `PUT /todos/<id>` route to mark a task as completed, create a dedicated route just for it.
 
-- [ ] Add a `PUT /todos/<id>/complete` route to `app.py` that sets the task as completed
-- [ ] Add a `completeTask(id)` function to `src/api.ts` that calls the new route
-- [ ] Update `App.tsx` to call `completeTask` instead of `updateTask` when marking a task as complete
+- [x] Add a `PUT /todos/<id>/complete` route to `app.py` that sets the task as completed
+- [x] Add a `completeTask(id)` function to `src/api.ts` that calls the new route
+- [x] Update `App.tsx` to call `completeTask` instead of `updateTask` when marking a task as complete
 
 > **Hints**
 >
@@ -123,9 +123,9 @@ Instead of using the general `PUT /todos/<id>` route to mark a task as completed
 
 Push your completed project to a public GitHub repository.
 
-- [ ] Create a public GitHub repository
-- [ ] Push your frontend code (`full-stack-bootcamp/`) to the repository
-- [ ] Push your backend code to the same repository in a separate folder (e.g. `backend/`)
+- [x] Create a public GitHub repository
+- [x] Push your frontend code (`full-stack-bootcamp/`) to the repository
+- [x] Push your backend code to the same repository in a separate folder (e.g. `backend/`)
 - [ ] Your repo must have a `README.md` at the root with your name and a short description of the project
 
 ---

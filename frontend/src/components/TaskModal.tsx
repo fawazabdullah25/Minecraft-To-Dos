@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import Crescent from "../assets/Crescent.svg";
+import Block from "../assets/Block.svg";
 import type { TaskCardProps } from "./TaskCard";
 
 // TaskModal accepts the same props as TaskCard plus modal-specific ones.
@@ -10,12 +10,12 @@ import type { TaskCardProps } from "./TaskCard";
 //     onClose={() => setIsOpen(false)}
 //     onMarkCompleted={() => handleComplete(id)}
 //     title="Iftar Prep"
-//     description="Prepare 20 meals for the local area"
+//     description="Make a simple iron farm"
 //     date="Mar 6th 2026"
-//     activeCrescents={4}
-//     totalCrescents={5}
-//     summary={["Assemble meal kits", "Logistics setup"]}
-//     volunteersNeeded="10 volunteers required"
+//     activeBlocks={4}
+//     totalBlocks={5}
+//     summary={["Group villagers", "Collect resources"]}
+//     timeNeeded="180 minutes required"
 //     completed={false}
 //   />
 
@@ -32,9 +32,9 @@ const TaskModal = ({
   title,
   description,
   date,
-  activeCrescents = 0,
+  activeBlocks = 0,
   summary = [],
-  volunteersNeeded,
+  timeNeeded,
   completed = false,
   completedOn,
 }: TaskModalProps) => {
@@ -79,16 +79,16 @@ const TaskModal = ({
         <div className="px-6 pt-5 pb-6 flex flex-col gap-4">
           {/* Large title */}
           <div className="flex flex-col items-center gap-3">
-            <h1 className="font-bold text-(--gold-primary) text-3xl font-lexend">{title}</h1>
+            <h1 className="font-bold text-(--color-primary) text-3xl font-mc">{title}</h1>
 
-            {/* Crescents */}
+            {/* Blocks */}
             <div className="flex items-center gap-2">
               {Array.from({ length: 5 }).map((_, i) => (
                 <img
                   key={i}
-                  src={Crescent}
-                  alt={i < activeCrescents ? "active" : "inactive"}
-                  className={"w-7 h-7 " + (i < activeCrescents ? "crescent-active" : "crescent-inactive")}
+                  src={Block}
+                  alt={i < activeBlocks ? "active" : "inactive"}
+                  className={"w-7 h-7 " + (i < activeBlocks ? "block-active" : "block-inactive")}
                 />
               ))}
             </div>
@@ -104,14 +104,14 @@ const TaskModal = ({
 
           {/* Description */}
           <div>
-            <p className="font-bold text-(--gold-primary) text-sm mb-1">Description</p>
+            <p className="font-bold text-(--color-primary) text-sm mb-1">Description</p>
             <p className="text-amber-100/80 text-sm leading-relaxed">{description}</p>
           </div>
 
           {/* Summary */}
           {summary.length > 0 && (
             <div>
-              <p className="font-bold text-(--gold-primary) text-sm mb-2">Summary:</p>
+              <p className="font-bold text-(--color-primary) text-sm mb-2">Summary:</p>
               <ul className="space-y-1 pl-1">
                 {summary.map((item, i) => (
                   <li key={i} className="flex gap-2 text-sm text-amber-100/80">
@@ -123,16 +123,14 @@ const TaskModal = ({
             </div>
           )}
 
-          {/* Volunteers Needed */}
-          {volunteersNeeded && (
+          {/* Time Needed */}
+          {timeNeeded && (
             <div>
-              <p className="font-bold text-(--gold-primary) text-sm mb-1">Volunteers Needed:</p>
+              <p className="font-bold text-(--color-primary) text-sm mb-1">Time Needed:</p>
               <p className="text-sm text-amber-100/80 flex items-center gap-2">
                 {/* Gold people icon */}
-                <svg className="w-5 h-5 shrink-0 text-[#D4AF37] fill-[#D4AF37]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                </svg>
-                <span>{volunteersNeeded} volunteers required</span>
+                <img src="src/assets/clock.svg"></img>
+                <span>{timeNeeded} minutes required</span>
               </p>
             </div>
           )}
@@ -142,7 +140,7 @@ const TaskModal = ({
             <div className="w-full flex flex-col items-center gap-2 mt-2">
               <div className="flex items-center w-full justify-center gap-4">
                 <span className="h-1 rounded bg-(--gold-cream) w-20" />
-                <span className="text-(--gold-bright) text-2xl font-bold tracking-wide">Completed</span>
+                <span className="text-(--color-primary) text-2xl font-bold tracking-wide">Completed</span>
                 <span className="h-1 rounded bg-(--gold-cream) w-20" />
               </div>
               <p className="text-amber-200/60 text-sm">{completedOn ?? date}</p>

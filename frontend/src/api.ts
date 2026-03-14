@@ -6,10 +6,10 @@
 //  else will update automatically.
 // ─────────────────────────────────────────────────────────────
 
-const BASE_URL = "https://opulent-halibut-rv4556w95qxc5rxg-5000.app.github.dev/";
+const BASE_URL = "http://127.0.0.1:5000";
 
 // ── The shape of a Task as it comes back from the backend ──────
-// The backend uses `priority` (1‑5) instead of `activeCrescents`.
+// The backend uses `priority` (1‑5) instead of `activeBlocks`.
 // We rename it here so the rest of the frontend doesn't have to
 // know about the difference.
 export type Task = {
@@ -17,12 +17,13 @@ export type Task = {
   title: string;
   description: string;
   date: string;
-  activeCrescents: number;    // mapped from backend `priority`
+  activeBlocks: number;    // mapped from backend `priority`
   variant?: "small" | "wide";
   completed?: boolean;
   completedOn?: string;
   summary?: string[];
-  volunteersNeeded?: number;
+  timeNeeded?: number;
+  tag?: string;
 };
 
 // Internal helper — maps the raw backend object to our Task shape.
@@ -33,14 +34,17 @@ function mapTask(raw: any): Task {
     title: raw.title,
     description: raw.description,
     date: raw.date,
-    activeCrescents: raw.priority ?? 0,  // backend calls it "priority"
+    activeBlocks: raw.priority ?? 0,  // backend calls it "priority"
     variant: raw.variant,
     completed: raw.completed,
     completedOn: raw.completedOn,
     summary: raw.summary,
-    volunteersNeeded: raw.volunteersNeeded,
+    timeNeeded: raw.timeNeeded,
+    tag: raw.tag
   };
 }
+
+
 
 // ── GET /todos ─────────────────────────────────────────────────
 // Fetches all tasks from the backend.
@@ -54,7 +58,7 @@ export async function getAllTasks(): Promise<Task[]> {
 
 // ── POST /todos ────────────────────────────────────────────────
 // Creates a new task.  The backend only needs the `description`;
-// Gemini AI will generate the title, date, crescents, etc.
+// Gemini AI will generate the title, date, blocks, etc.
 // Returns the newly-created Task.
 export async function createTask(description: string): Promise<Task> {
   const response = await fetch(`${BASE_URL}/todos`, {
@@ -76,11 +80,11 @@ export async function updateTask(
   id: number,
   updates: Partial<Omit<Task, "id">>
 ): Promise<Task> {
-  // Re‑map activeCrescents → priority for the backend
+  // Re‑map activeBlocks → priority for the backend
   const body: Record<string, unknown> = { ...updates };
-  if ("activeCrescents" in body) {
-    body.priority = body.activeCrescents;
-    delete body.activeCrescents;
+  if ("activeBlocks" in body) {
+    body.priority = body.activeBlocks;
+    delete body.activeBlocks;
   }
 
   const response = await fetch(`${BASE_URL}/todos/${id}`, {
@@ -92,6 +96,13 @@ export async function updateTask(
   const data = await response.json();
   return mapTask(data);
 }
+
+export async function completeTask(id: number): Promise<Task> {
+  const response = await fetch(`${BASE_URL}/todos/${id}/complete`, { method: "PUT" });
+  if (!response.ok) throw new Error("Failed to complete task");
+  return mapTask(await response.json());
+}
+
 
 // ── DELETE /todos/:id ──────────────────────────────────────────
 // Deletes a task by id.

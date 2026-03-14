@@ -1,16 +1,17 @@
-import Crescent from "../assets/Crescent.svg";
-import Lantern  from "../assets/Lantern.png";
+import Block from "../assets/Block.svg";
+import Pickaxe from "../assets/Pickaxe.png";
 
 export type TaskCardProps = {
   title: string;
   description: string;
   date: string;
-  activeCrescents?: number;   // how many crescents are "lit"
+  activeBlocks?: number;   // how many blocks are "lit"
   variant?: "small" | "wide"; // wide cards span 2 grid columns
   completed?: boolean;
   completedOn?: string;       // e.g. "Mar 12th 2026"
   summary?: string[];         // shown only in the modal
-  volunteersNeeded?: number;  // shown only in the modal — label appended in the UI
+  timeNeeded?: number;  // shown only in the modal — label appended in the UI
+  tag?: string;
   onClick?: () => void;       // passed down from App to open the modal
 };
 
@@ -20,10 +21,11 @@ const TaskCard = ({
   title,
   description,
   date,
-  activeCrescents = 0,
-  variant         = "small",
-  completed       = false,
+  activeBlocks = 0,
+  variant = "small",
+  completed = false,
   completedOn,
+  tag,
   onClick,
 }: TaskCardProps) => {
   const isWide = variant === "wide";
@@ -47,13 +49,17 @@ const TaskCard = ({
         <div className="absolute inset-0 bg-(--bg-dark) bg-opacity-25 rounded-2xl pointer-events-none" />
       )}
 
-      {/* Top row — lantern | title | lantern */}
+      <div className="absolute bottom-2 right-2 bg-(--color-secondary) rounded-full pl-2 pr-2 font-mc">
+        {tag}
+      </div>
+
+      {/* Top row — pickaxe | title | pickaxe */}
       <div className="relative w-full flex items-center justify-between gap-2 min-h-12">
-        <img src={Lantern} alt="" className={`w-5 h-8 shrink-0 ${completed ? "opacity-50" : "opacity-85"}`} />
+        <img src={Pickaxe} alt="" className={`w-8 h-8 shrink-0 ${completed ? "opacity-50" : "opacity-85"}`} />
         <h3 className={`font-medium text-center text-base leading-tight ${completed ? "text-(--text-cream)/70" : "text-(--text-cream)"}`}>
           {title}
         </h3>
-        <img src={Lantern} alt="" className={`w-5 h-8 shrink-0 ${completed ? "opacity-50" : "opacity-85"}`} />
+        <img src={Pickaxe} alt="" className={`w-8 h-8 shrink-0 ${completed ? "opacity-50" : "opacity-85"}`} />
       </div>
 
       {/* Description */}
@@ -62,14 +68,14 @@ const TaskCard = ({
         {description}
       </p>
 
-      {/* Crescent row — priority indicator */}
+      {/* Block row — priority indicator */}
       <div className="relative flex items-center gap-1 mt-3">
         {Array.from({ length: 5 }).map((_, i) => (
           <img
             key={i}
-            src={Crescent}
-            alt={i < activeCrescents ? "active" : "inactive"}
-            className={"w-6 h-6 " + (i < activeCrescents ? "crescent-active" : "crescent-inactive")}
+            src={Block}
+            alt={i < activeBlocks ? "active" : "inactive"}
+            className={"w-6 h-6 " + (i < activeBlocks ? "block-active" : "block-inactive")}
           />
         ))}
       </div>
@@ -78,18 +84,18 @@ const TaskCard = ({
       {completed ? (
         <div className="relative w-full mt-3">
           <div className="flex items-center gap-2 w-full">
-            <span className="flex-1 border-t-2 border-(--gold-bright)/70" />
-            <span className="text-(--gold-bright) text-base font-bold tracking-wide whitespace-nowrap">
+            <span className="flex-1 border-t-2 border-(--color-primary)/70" />
+            <span className="text-(--color-primary) text-base font-bold tracking-wide whitespace-nowrap">
               Completed
             </span>
-            <span className="flex-1 border-t-2 border-(--gold-bright)/70" />
+            <span className="flex-1 border-t-2 border-(--color-primary)/70" />
           </div>
           <p className="text-center text-amber-200/50 text-xs mt-1">
             {completedOn ?? date}
           </p>
         </div>
       ) : (
-        <p className="text-amber-200/50 text-xs mt-3">{date}</p>
+        <p className="text-(--color-secondary) text-xs mt-3">{date}</p>
       )}
     </div>
   );
