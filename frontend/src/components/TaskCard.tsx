@@ -36,12 +36,12 @@ const TaskCard = ({
       className={[
         "relative bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px]",
         "border rounded-2xl flex flex-col items-center",
-        "px-6 pt-4 pb-5 overflow-hidden",
+        "px-6 pt-4 pb-5",
         completed
-          ? "border-(--gold-cream) shadow-[0_0_20px_3px_rgba(212,175,55,0.18)]"
-          : "border-(--gold-cream)",
+          ? "border-(--color-side) shadow-[0_0_20px_3px_rgba(212,175,55,0.18)]"
+          : "border-(--color-side)",
         isWide ? "md:col-span-2" : "",
-        onClick ? "cursor-pointer hover:border-(--gold-cream) transition-colors duration-200" : "",
+        onClick ? "cursor-pointer hover:border-(--color-side) transition-colors duration-200" : "",
       ].filter(Boolean).join(" ")}
     >
       {/* Completed dim overlay */}
@@ -49,9 +49,11 @@ const TaskCard = ({
         <div className="absolute inset-0 bg-(--bg-dark) bg-opacity-25 rounded-2xl pointer-events-none" />
       )}
 
-      <div className="absolute bottom-2 right-2 bg-(--color-secondary) rounded-full pl-2 pr-2 font-mc">
-        {tag}
-      </div>
+      {tag && (
+        <span className="absolute -top-3 -right-3 z-20 bg-(--color-primary) rounded-md pl-2 pr-2 font-mc text-blue-950 border-2 border-yellow-300">
+          {tag}
+        </span>
+      )}
 
       {/* Top row — pickaxe | title | pickaxe */}
       <div className="relative w-full flex items-center justify-between gap-2 min-h-12">

@@ -146,7 +146,7 @@ This is the **first file** to set up. It defines the colour palette as CSS custo
   --bg-dark:        #0A1128;  /* deep navy — main background */
   --panel-deep:     #0D1726;  /* slightly lighter navy — card/modal backgrounds */
   --color-primary:   #D4AF37;  /* main gold */
-  --gold-cream:     #FFF1AA;  /* light gold / cream — borders, subtle text */
+  --color-side:     #FFF1AA;  /* light gold / cream — borders, subtle text */
   --color-primary:    #E8C84A;  /* bright gold — highlights */
   --cta-1:          #C9A227;  /* CTA button gradient start */
   --cta-2:          #E8C84A;  /* CTA button gradient end */
@@ -306,11 +306,11 @@ const Input = () => {
           placeholder="Add your Next Ramadan Task Here......"
           className="
             w-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px]
-            border border-(--gold-cream) rounded-full
+            border border-(--color-side) rounded-full
             py-4 px-6 pl-12
             placeholder:text-amber-200/50 text-amber-100
             outline-none
-            focus:border-(--gold-cream) focus:ring-2 focus:ring-(--color-primary)
+            focus:border-(--color-side) focus:ring-2 focus:ring-(--color-primary)
           "
         />
 
@@ -326,8 +326,8 @@ const Input = () => {
       <button className="
         ml-4 px-4 py-4 rounded-full
         bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px]
-        border border-(--gold-cream) text-amber-100
-        hover:border-(--gold-cream)
+        border border-(--color-side) text-amber-100
+        hover:border-(--color-side)
       ">
         <img src={AddIcon} alt="Add Icon" className="w-5 h-5" />
       </button>
@@ -415,10 +415,10 @@ const TaskCard = ({
         "border rounded-2xl flex flex-col items-center",
         "px-6 pt-4 pb-5 overflow-hidden",
         completed
-          ? "border-(--gold-cream) shadow-[0_0_20px_3px_rgba(212,175,55,0.18)]"
-          : "border-(--gold-cream)",
+          ? "border-(--color-side) shadow-[0_0_20px_3px_rgba(212,175,55,0.18)]"
+          : "border-(--color-side)",
         isWide ? "md:col-span-2" : "",
-        onClick ? "cursor-pointer hover:border-(--gold-cream) transition-colors duration-200" : "",
+        onClick ? "cursor-pointer hover:border-(--color-side) transition-colors duration-200" : "",
       ].filter(Boolean).join(" ")}
     >
       {/* Completed dim overlay */}
@@ -871,16 +871,16 @@ const TaskModal = ({
         className={`
           relative w-full max-w-md bg-(--panel-deep) rounded-2xl overflow-hidden
           ${completed
-            ? "border border-(--gold-cream) shadow-[0_0_40px_8px_rgba(212,175,55,0.22)]"
-            : "border border-(--gold-cream)/50 shadow-[0_0_40px_6px_rgba(212,175,55,0.15)]"
+            ? "border border-(--color-side) shadow-[0_0_40px_8px_rgba(212,175,55,0.22)]"
+            : "border border-(--color-side)/50 shadow-[0_0_40px_6px_rgba(212,175,55,0.15)]"
           }
         `}
         onClick={(e) => e.stopPropagation()}
       >
 
         {/* ── Header bar ── */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-(--gold-cream)/20">
-          <h2 className="flex-1 text-center font-bold text-(--gold-cream) text-sm tracking-[0.15em] uppercase">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-(--color-side)/20">
+          <h2 className="flex-1 text-center font-bold text-(--color-side) text-sm tracking-[0.15em] uppercase">
             {title} Task Details
           </h2>
           <button
@@ -906,10 +906,10 @@ const TaskModal = ({
                 />
               ))}
             </div>
-            <p className="font-semibold text-(--gold-cream) text-sm">Date: {date}</p>
+            <p className="font-semibold text-(--color-side) text-sm">Date: {date}</p>
           </div>
 
-          <div className="border-t border-(--gold-cream)/15" />
+          <div className="border-t border-(--color-side)/15" />
 
           {/* Description */}
           <div>
@@ -949,9 +949,9 @@ const TaskModal = ({
           {completed && (
             <div className="w-full flex flex-col items-center gap-2 mt-2">
               <div className="flex items-center w-full justify-center gap-4">
-                <span className="h-1 rounded bg-(--gold-cream) w-20" />
+                <span className="h-1 rounded bg-(--color-side) w-20" />
                 <span className="text-(--color-primary) text-2xl font-bold tracking-wide">Completed</span>
-                <span className="h-1 rounded bg-(--gold-cream) w-20" />
+                <span className="h-1 rounded bg-(--color-side) w-20" />
               </div>
               <p className="text-amber-200/60 text-sm">{completedOn ?? date}</p>
             </div>
@@ -1462,7 +1462,7 @@ const Input = ({ onTaskAdded }: InputProps) => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-          className="w-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--gold-cream) rounded-full py-4 px-6 pl-12 placeholder:text-amber-200/50 text-amber-100 outline-none focus:border-(--gold-cream) focus:ring-2 focus:ring-(--color-primary)"
+          className="w-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--color-side) rounded-full py-4 px-6 pl-12 placeholder:text-amber-200/50 text-amber-100 outline-none focus:border-(--color-side) focus:ring-2 focus:ring-(--color-primary)"
         />
 
         {/* Right decoration icon (non-interactive) */}
@@ -1475,7 +1475,7 @@ const Input = ({ onTaskAdded }: InputProps) => {
       <button
         onClick={handleSubmit}
         aria-label="Submit task"
-        className="ml-4 px-4 py-4 rounded-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--gold-cream) text-amber-100 hover:border-(--gold-cream)"
+        className="ml-4 px-4 py-4 rounded-full bg-(--bg-dark) bg-opacity-20 backdrop-blur-[3px] border border-(--color-side) text-amber-100 hover:border-(--color-side)"
       >
         <img src={AddIcon} alt="Add Icon" className="w-5 h-5" />
       </button>

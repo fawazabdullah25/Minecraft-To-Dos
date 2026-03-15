@@ -61,8 +61,8 @@ function App() {
       className="min-h-screen bg-(--bg-dark) text-white relative overflow-hidden font-sans flex flex-col items-center"
       style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: "cover" }}
     >
-      {/* Gold border frame */}
-      <div className="relative z-2 mx-auto w-[95vw] h-[90vh] border-[3px] border-(--text-cream) flex flex-col items-center gap-10 py-12 px-10 shadow-2xl my-12 backdrop-blur-[3px]">
+      {/* Green border frame */}
+      <div className="relative z-2 mx-auto w-[95vw] border-[3px] border-(--text-cream) flex flex-col items-center gap-10 py-12 px-10 shadow-2xl my-12 backdrop-blur-[3px]">
         <Wallpaper onChangeWallpaper={setWallpaper} />
         <div className="max-w-4xl flex flex-col items-center justify-start gap-6">
           <Header />

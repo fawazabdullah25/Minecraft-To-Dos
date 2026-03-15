@@ -58,12 +58,12 @@ const TaskModal = ({
     >
       {/* Modal panel */}
       <div
-        className={`relative w-full max-w-md bg-(--panel-deep) ${completed ? "border border-(--gold-cream) shadow-[0_0_40px_8px_rgba(212,175,55,0.22)]" : "border border-(--gold-cream)/50 shadow-[0_0_40px_6px_rgba(212,175,55,0.15)]"} rounded-2xl overflow-hidden`}
+        className={`relative w-full max-w-md bg-(--panel-deep) ${completed ? "border border-(--color-side) shadow-[0_0_40px_8px_rgba(212,175,55,0.22)]" : "border border-(--color-side)/50 shadow-[0_0_40px_6px_rgba(212,175,55,0.15)]"} rounded-2xl overflow-hidden`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Header bar ── */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-(--gold-cream)/20">
-          <h2 className="flex-1 text-center font-bold text-(--gold-cream) text-sm tracking-[0.15em] uppercase">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-(--color-side)/20">
+          <h2 className="flex-1 text-center font-bold text-(--color-side) text-sm tracking-[0.15em] uppercase">
             {title} Task Details
           </h2>
           <button
@@ -94,13 +94,13 @@ const TaskModal = ({
             </div>
 
             {/* Date */}
-            <p className="font-semibold text-(--gold-cream) text-sm">
+            <p className="font-semibold text-(--color-side) text-sm">
               Date: {date}
             </p>
           </div>
 
           {/* Divider */}
-          <div className="border-t border-(--gold-cream)/15" />
+          <div className="border-t border-(--color-side)/15" />
 
           {/* Description */}
           <div>
@@ -139,9 +139,9 @@ const TaskModal = ({
           {completed && (
             <div className="w-full flex flex-col items-center gap-2 mt-2">
               <div className="flex items-center w-full justify-center gap-4">
-                <span className="h-1 rounded bg-(--gold-cream) w-20" />
+                <span className="h-1 rounded bg-(--color-side) w-20" />
                 <span className="text-(--color-primary) text-2xl font-bold tracking-wide">Completed</span>
-                <span className="h-1 rounded bg-(--gold-cream) w-20" />
+                <span className="h-1 rounded bg-(--color-side) w-20" />
               </div>
               <p className="text-amber-200/60 text-sm">{completedOn ?? date}</p>
             </div>

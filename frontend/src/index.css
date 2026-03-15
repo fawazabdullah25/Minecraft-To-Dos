@@ -4,15 +4,15 @@
 :root {
 	--bg-dark: #093613;
 	--panel-deep: #0d260f;
-	--color-primary: #00ce37;
-	--color-secondary: #57b958;
+	--color-primary: #20d550;
+	--color-secondary: #169418;
 	--cta-1: #27c9ab;
 	--cta-2: #4ae8e0;
 	--text-cream: #96f63c;
 	--scroll-track: rgba(212, 175, 55, 0.06);
 	--scroll-thumb-start: rgba(212, 175, 55, 0.95);
 	--scroll-thumb-end: rgba(212, 175, 55, 0.6);
-	--gold-cream: #42fe45;
+	--color-side: #4cae75;
 }
 
 @font-face {

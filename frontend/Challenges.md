@@ -126,7 +126,7 @@ Push your completed project to a public GitHub repository.
 - [x] Create a public GitHub repository
 - [x] Push your frontend code (`full-stack-bootcamp/`) to the repository
 - [x] Push your backend code to the same repository in a separate folder (e.g. `backend/`)
-- [ ] Your repo must have a `README.md` at the root with your name and a short description of the project
+- [x] Your repo must have a `README.md` at the root with your name and a short description of the project
 
 ---
 
