@@ -1,10 +1,15 @@
+import type { Dispatch, SetStateAction } from "react";
 import wallpaper1 from "../assets/wallpaper1.png";
 import wallpaper2 from "../assets/wallpaper2.png";
 import wallpaper3 from "../assets/wallpaper3.png";
 
-const Wallpaper = ({ onChangeWallpaper }) => {
+type WallpaperProps = {
+  onChangeWallpaper: Dispatch<SetStateAction<string>>;
+};
+
+const Wallpaper = ({ onChangeWallpaper }: WallpaperProps) => {
   const handleCycle = () => {
-    onChangeWallpaper((prev) => {
+    onChangeWallpaper((prev: string) => {
       if (prev === wallpaper1) return wallpaper2;
       if (prev === wallpaper2) return wallpaper3;
       if (prev === wallpaper3) return wallpaper1;

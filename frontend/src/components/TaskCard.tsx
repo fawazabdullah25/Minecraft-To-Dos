@@ -1,5 +1,6 @@
 import Block from "../assets/Block.svg";
 import Pickaxe from "../assets/Pickaxe.png";
+import type { Task } from "../api";
 
 export type TaskCardProps = {
   title: string;
@@ -13,6 +14,8 @@ export type TaskCardProps = {
   timeNeeded?: number;  // shown only in the modal — label appended in the UI
   tag?: string;
   onClick?: () => void;       // passed down from App to open the modal
+  onUpdate?: (changes: Partial<Task>) => void;
+  onDelete?: () => void;
 };
 
 
